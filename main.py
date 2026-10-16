@@ -2,6 +2,8 @@ import pygame
 from game.game_engine import GameEngine
 
 # Initialize pygame/Start application
+# (mono 16-bit audio, set up before init so the sound effects match the mixer)
+pygame.mixer.pre_init(44100, -16, 1, 512)
 pygame.init()
 
 # Screen dimensions
@@ -31,6 +33,9 @@ def main():
         engine.handle_input()
         engine.update()
         engine.render(SCREEN)
+
+        if engine.quit_requested:
+            running = False
 
         pygame.display.flip()
         clock.tick(FPS)
