@@ -1,5 +1,6 @@
 import pygame
 
+
 class Player:
     def __init__(self, x, ground_y, width=30, height=40):
         self.x = x
@@ -13,9 +14,12 @@ class Player:
         self.on_ground = True
 
     def jump(self):
+        """Start a jump. Returns True only if the jump actually happened."""
         if self.on_ground:
             self.vy = self.jump_strength
             self.on_ground = False
+            return True
+        return False
 
     def update(self):
         self.vy += self.gravity
